@@ -1,0 +1,16 @@
+name: CI
+on:
+  schedule:
+    - cron:  '* 3,15 * * *'
+jobs:
+  singleJobName:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [4.x, 5.x, 6.x, 7.x]
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/checkout@v2
+      - uses: cirruslabs/cirrus-action@v2
